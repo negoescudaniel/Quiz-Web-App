@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f9f9f9;
+    }
+
+    h1 {
+        color: #333;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    p {
+        color: #555;
+        text-align: center;
+    }
+
+    form {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 20px;
+        max-width: 500px;
+        margin: 0 auto;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 10px;
+    }
+
+    input[type="submit"] {
+        display: block;
+        margin: 20px auto 0;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    input[type="submit"]:hover {
+        background-color: #0056b3;
+    }
+
+    .button-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    .button-container button {
+        padding: 10px 15px;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+
+    .button-container button:hover {
+        background-color: #0056b3;
+    }
+
+    .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+    }
+  </style>
+  <script>
+    // Funcția de validare
+    function validateForm() {
+        var checkboxes = document.querySelectorAll('input[name="raspuns[]"]:checked');
+        if (checkboxes.length == 0) {
+            // Afișează un mesaj de eroare dacă nu sunt selectate opțiuni
+            document.getElementById('error-message').style.display = 'block';
+            return false; // Nu trimite formularul
+        }
+        return true; // Trimite formularul
+    }
+  </script>
+</head>
+<body>
+<h1>Quiz</h1>
+<div th:if="${intrebare}">
+  <p th:text="${intrebare.intrebare}"></p>
+  <form th:action="@{/submit_answer}" method="post" onsubmit="return validateForm()">
+    <div>
+      <p>Răspunsuri posibile:</p>
+      <ul>
+        <li th:each="optiune : ${optiuni}">
+          <!-- Checkbox pentru fiecare opțiune -->
+          <input type="checkbox" name="raspuns[]" th:value="${optiune}" />
+          <label th:text="${optiune}"></label>
+        </li>
+      </ul>
+    </div>
+    <div class="error-message" id="error-message" style="display: none;">
+      Te rugăm să selectezi cel puțin un răspuns înainte de a trimite formularul.
+    </div>
+    <input type="submit" value="Trimite răspunsul" />
+  </form>
+</div>
+</body>
+</html>

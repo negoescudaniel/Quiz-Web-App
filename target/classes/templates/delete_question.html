@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Ștergere Întrebare</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+    }
+    h1 {
+        color: #333;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    input[type="text"], input[type="submit"] {
+        margin: 10px 0;
+        padding: 10px;
+        width: 100%;
+    }
+    .button-container {
+        margin-top: 20px;
+    }
+    button, a {
+        padding: 10px 15px;
+        text-decoration: none;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    a:hover, button:hover {
+        background-color: #0056b3;
+    }
+    .message {
+        margin-top: 20px;
+        padding: 10px;
+        border-radius: 5px;
+    }
+    .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+  </style>
+</head>
+<body>
+<a href="/professor-home">Înapoi</a>
+<h1>Ștergere Întrebare</h1>
+<!-- Afișarea mesajelor de succes sau eroare -->
+<div th:if="${message}" class="message success" th:text="${message}"></div>
+<div th:if="${error}" class="message error" th:text="${error}"></div>
+
+<!-- Formular pentru ștergerea întrebărilor -->
+<form th:action="@{/delete_question}" method="post">
+  <div>
+    <label for="numarIntrebare">Numărul întrebării:</label>
+    <input type="text" id="numarIntrebare" name="numarIntrebare" required/>
+  </div>
+  <div class="button-container">
+    <input type="submit" value="Șterge întrebare" />
+  </div>
+</form>
+
+<a href="/view_quiz">Vezi quiz-ul</a>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Learning</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+    }
+    h1 {
+        color: #333;
+    }
+    form {
+        margin-bottom: 20px;
+    }
+    input[type="number"], input[type="radio"] {
+        margin: 10px 0;
+    }
+    .button-container {
+        margin-top: 20px;
+    }
+    button, a {
+        padding: 10px 15px;
+        text-decoration: none;
+        background-color: #007BFF;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    a:hover, button:hover {
+        background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+<h1>Platformă online pentru testarea cunoștințelor</h1>
+
+<!-- Formular pentru opțiuni -->
+<form action="/choose-option2" method="post">
+  <p>Ce fel de întrebare doriți să adăugați?</p>
+  <input type="radio" id="option1" name="option" value="option1" required>
+  <label for="option1">Un Singur Răspuns Corect</label><br>
+
+  <input type="radio" id="option2" name="option" value="option2">
+  <label for="option2">Răspuns Multiplu</label><br>
+
+  <br><button type="submit">Continuă</button>
+</form>
+
+</body>
+</html>

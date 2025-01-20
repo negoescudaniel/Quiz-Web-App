@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <title>Vizualizare Quiz</title>
+  <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+    }
+    h1 {
+        color: #333;
+    }
+    .question {
+        margin-bottom: 20px;
+    }
+    .answers {
+        margin-left: 20px;
+    }
+  </style>
+</head>
+<body>
+<h1>Quiz Java - Întrebări</h1>
+
+<div th:each="intrebare, iterStat : ${intrebari}">
+  <div class="question">
+    <p th:text="'Întrebarea ' + ${iterStat.index + 1} + ': ' + ${intrebare.intrebare}"></p>
+
+    <div class="answers">
+      <p th:if="${intrebare instanceof T(com.example.quizes.controller.IntrebareCuRaspunsUnic)}">
+        <span>Răspuns corect: </span>
+        <span th:text="${intrebare.raspunsCorect + '; '}"></span><br>
+        <span>Răspunsuri greșite: </span>
+        <span th:each="raspuns : ${intrebare.raspunsuriGresite}" th:text="${raspuns + '; '}"></span>
+      </p>
+
+      <p th:if="${intrebare instanceof T(com.example.quizes.controller.IntrebareCuRaspunsMultiplu)}">
+        <span>Răspunsuri corecte: </span>
+        <span th:each="raspuns : ${intrebare.raspunsuriCorecte}" th:text="${raspuns + '; '}"></span><br>
+        <span>Răspunsuri greșite: </span>
+        <span th:each="raspuns : ${intrebare.raspunsuriGresite}" th:text="${raspuns + '; '}"></span>
+      </p>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
